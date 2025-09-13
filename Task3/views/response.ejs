@@ -1,0 +1,432 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script type="module" src="/spline-viewer.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script> </head>
+
+    <style>
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+    .background-wrapper {
+      position: absolute;
+      top: 0; left: 0; right: 0; width: 100%; height: 120%;
+      z-index: 0;
+      overflow: hidden;
+      
+      
+      
+    }
+
+    spline-viewer {
+      position: absolute;
+      top: 0; left: 0;right:0 ;
+      width: 150%;
+      
+      height: 100%;
+      display: block;
+      
+    }
+
+    </style>
+<body class="bg-[#333] font-sans m-0 p-0 text-[#333]">
+    <!-- Navbar -->
+    <div id="navbar" class=" fixed top-0 left-0 right-0 bg-transparent text-white shadow-[0_5px_10px_rgba(233,227,227,0.715)] z-10">
+  <nav class="bg-transparent flex flex-wrap justify-between items-center px-4 py-4 md:px-6 md:py-5 backdrop:blur bg-white/30">
+    <!-- Logo -->
+    <div id="logo">
+      <h2 class=" ml-12 font-extrabold text-lg md:text-2xl  text-clip">FUN</h2>
+    </div>
+
+    <!-- Logout & Account Buttons -->
+    <div id="lgoutbtn" class="flex items-center gap-4 mt-4 mr-12 md:mt-0">
+      <!-- Circle Button -->
+      <button onclick="ACCBTN()"
+        class="w-8 h-8 rounded-full bg-white border-none cursor-pointer transform transition-transform duration-200 hover:scale-110">
+      </button>
+
+      <!-- Logout Button -->
+      <a href="/logout"
+        class="px-4 py-2 border border-white rounded text-white font-bold hover:bg-white hover:text-blue-600 transition duration-300 text-sm md:text-base">
+        Logout
+      </a>
+    </div>
+     <!-- Account Details Panel -->
+     <div id="ACCDETAIL" class="hidden absolute top-16 right-5 bg-white rounded-lg shadow-md p-4 w-64 z-[1001]">
+      <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-200">
+        <h3 class="m-0 text-blue-700 text-lg font-semibold">Account Details</h3>
+        <button onclick="CLSBTN()" class="bg-transparent border-none text-gray-600 text-xl cursor-pointer leading-none">
+          <b>×</b>
+        </button>
+      </div>
+      <div>
+        <p class="my-2 text-gray-800"><b>Name:</b> <%= user.name %></p>
+        <p class="my-2 text-gray-800"><b>Email:</b> <%= user.email %></p>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<header class="text-white  h-[786px] flex items-center justify-center relative overflow-hidden">
+  <!-- Background image -->
+  <div class="absolute inset-0 bg-cover  bg-center -z-10" style="background-image: url('/class2.jpg');"></div>
+
+  <!-- Content -->
+  <div id="head" class="flex flex-col items-center justify-center text-center z-10 relative">
+    <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">Welcome to Fun Academy</h2>
+    <h5 class="text-gray-300  text-xl font-bold mt-2 max-w-2xl">
+      Empowering minds, inspiring futures. Where every student discovers <br>their potential and achieves excellence.
+    </h5>
+    <div>
+      <button class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">Get Started</button>
+      <button class="mt-6 ml-4 px-6 py-3 bg-transparent border border-white text-white rounded-lg hover:bg-white hover:text-blue-800 transition duration-300">Learn More</button>
+    </div>
+  </div>
+</header>
+
+
+   
+    
+
+    <!-- Main Content -->
+    <main id="main" class="mt-10 p-8 relative z-0 text-white font-sans max-w-7xl mx-auto">
+      <section class="mb-12 text-center">
+        <h1 class="text-3xl font-bold mb-4">About FUN Academy</h1>
+        <p class="max-w-3xl mx-auto text-lg">
+          FUN Academy has been a beacon of educational excellence for over three decades. We are committed to providing a nurturing environment where students can thrive academically, socially, and personally.
+        </p>
+      </section>
+      <section class="flex flex-col md:flex-row items-center gap-8">
+        <div id="clsimg" class="md:w-1/2">
+          <img src="/clsbuild.jpg" alt="Classroom" class="rounded-lg shadow-lg w-full object-cover" />
+        </div>
+        <div id="clsimgcnt" class="md:w-1/2 text-left">
+          <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
+          <p class="mb-4">
+            To provide a comprehensive education that prepares students for success in an ever-changing world. We believe in fostering intellectual curiosity, character development, and global citizenship.
+          </p>
+          <p>
+            Our holistic approach ensures that every student receives personalized attention and opportunities to excel in academics, arts, sports, and community service.
+          </p>
+        </div>
+      </section>
+      <section id="cards" class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="bg-gray-500 rounded-lg shadow p-6 transition-transform duration-300 hover:scale-105 hover:backdrop-blur-lg hover:bg-white/30">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-blue-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8h7" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16h7" />
+          </svg>
+          <h3 class="text-lg font-semibold mb-2">Excellence in Education</h3>
+          <p class="text-gray-700">Comprehensive curriculum designed to foster critical thinking and creativity.</p>
+        </div>
+        <div class="bg-gray-500 rounded-lg shadow p-6 transition-transform duration-300 hover:scale-105 hover:backdrop-blur-lg hover:bg-white/30">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-blue-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2" />
+          </svg>
+          <h3 class="text-lg font-semibold mb-2">Experienced Faculty</h3>
+          <p class="text-gray-700">Dedicated teachers committed to nurturing each student's unique potential.</p>
+        </div>
+        <div class="bg-gray-500 rounded-lg shadow p-6 transition-transform duration-300 hover:scale-105 hover:backdrop-blur-lg hover:bg-white/30">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-blue-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M3 12h18M3 17h18" />
+          </svg>
+          <h3 class="text-lg font-semibold mb-2">Modern Facilities</h3>
+          <p class="text-gray-700">State-of-the-art classrooms, laboratories, and recreational facilities.</p>
+        </div>
+      </section>
+
+      <section class="mt-20 max-w-7xl mx-auto px-4 text-white">
+        <h2 class="text-3xl font-bold mb-4 text-center">Admissions</h2>
+        <p class="text-center mb-12 max-w-3xl mx-auto text-gray-300">
+          Join the FUN Academy family! We welcome students who are eager to learn, grow, and make a positive impact in their community.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-6">Admission Process</h3>
+            <ol class="space-y-6 list-decimal list-inside text-gray-300">
+              <li>
+                <strong>Submit Application</strong>
+                <p class="text-sm text-gray-400">Complete our online application form with all required information and documents.</p>
+              </li>
+              <li>
+                <strong>Schedule Interview</strong>
+                <p class="text-sm text-gray-400">Arrange a meeting with our admissions team to discuss your child's needs and goals.</p>
+              </li>
+              <li>
+                <strong>Campus Tour</strong>
+                <p class="text-sm text-gray-400">Visit our facilities and get a feel for the Sunrise Academy community.</p>
+              </li>
+              <li>
+                <strong>Enrollment</strong>
+                <p class="text-sm text-gray-400">Complete the enrollment process and prepare for an exciting educational journey.</p>
+              </li>
+            </ol>
+          </div>
+          <div class="space-y-6">
+            <div class="bg-[#444] rounded-lg shadow p-6">
+              <h4 class="text-lg font-semibold text-blue-400 mb-3">Application Requirements</h4>
+              <ul class="text-gray-300 list-disc list-inside space-y-1">
+                <li>Completed application form</li>
+                <li>Birth certificate</li>
+                <li>Previous school transcripts</li>
+                <li>Immunization records</li>
+                <li>Recommendation letters</li>
+                <li>Application fee ($50)</li>
+              </ul>
+            </div>
+            <div class="bg-[#444] rounded-lg shadow p-6">
+              <h4 class="text-lg font-semibold text-blue-400 mb-3">Important Dates</h4>
+              <table class="w-full text-gray-300 text-sm">
+                <tbody>
+                  <tr class="border-b border-gray-600">
+                    <td class="py-2 font-semibold">Application Deadline</td>
+                    <td class="py-2 text-right text-blue-400">March 15, 2024</td>
+                  </tr>
+                  <tr class="border-b border-gray-600">
+                    <td class="py-2 font-semibold">Admission Decisions</td>
+                    <td class="py-2 text-right text-blue-400">April 30, 2024</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-semibold">Enrollment Deadline</td>
+                    <td class="py-2 text-right text-blue-400">May 31, 2024</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#222] text-white py-10 w-[1524px] mt-10 -ml-40 bottom-0 -mb-10">
+      <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h2 class="text-2xl font-bold flex items-center gap-2 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 21.75c-2.694 0-5.197-.88-7.16-2.343a12.083 12.083 0 01.665-6.479L12 14z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7.5" />
+            </svg>
+            FUN Academy
+          </h2>
+          <p class="text-gray-300 max-w-xs">
+            Empowering minds, inspiring futures. Where every student discovers their potential and achieves excellence.
+          </p>
+          <div class="flex space-x-4 mt-4">
+            <a href="#" class="hover:text-yellow-400" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54v-2.89h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z" />
+              </svg>
+            </a>
+            <a href="#" class="hover:text-yellow-400" aria-label="Twitter">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23 3a10.9 10.9 0 01-3.14.86 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+              </svg>
+            </a>
+            <a href="#" class="hover:text-yellow-400" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zM12 7a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0z" />
+              </svg>
+            </a>
+            <a href="#" class="hover:text-yellow-400" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 3a2 2 0 110 4 2 2 0 010-4z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="#" class="hover:text-yellow-400">Home</a></li>
+            <li><a href="#" class="hover:text-yellow-400">About</a></li>
+            <li><a href="#" class="hover:text-yellow-400">Academics</a></li>
+            <li><a href="#" class="hover:text-yellow-400">Admissions</a></li>
+            <li><a href="#" class="hover:text-yellow-400">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Contact Info</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li>123 Education Dr</li>
+            <li>Learning City, LC 12345</li>
+            <li>(91+) 1234567</li>
+            <li>info@FUNacademy.edu</li>
+          </ul>
+        </div>
+      </footer>
+  
+   
+    <script>
+        const ACCDETAIL = document.getElementById("ACCDETAIL");
+
+        function ACCBTN() {
+            ACCDETAIL.style.display = "block";
+            gsap.fromTo(ACCDETAIL, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4 });
+        }
+
+        function CLSBTN() {
+            gsap.to(ACCDETAIL, {
+        opacity: 0,
+        y: -20,
+        duration: 0.3,
+        onComplete: () => {
+          ACCDETAIL.style.display = "none";
+        }
+      });
+        }
+
+        // Close account details when clicking outside
+        document.addEventListener('click', function(event) {
+            const accountBtn = document.querySelector('button[onclick="ACCBTN()"]');
+            
+            if (!ACCDETAIL.contains(event.target) && event.target !== accountBtn && !accountBtn.contains(event.target)) {
+                ACCDETAIL.style.display = 'none';
+            }
+        });
+
+// Navbar animation on page load
+window.addEventListener("DOMContentLoaded", () => {
+    const tl = gsap.timeline();
+    tl.fromTo("spline-viewer", {
+      y: 100,
+      opacity: -1
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: "ease.in"
+    },
+
+    tl.fromTo("#navbar", {
+      y: -100,
+      opacity: -1
+    },{
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: "ease.in"
+    }));
+
+ 
+
+    tl.from("#logo", {
+      x: -100,
+      opacity: 0,
+      duration: 0.5,
+      ease: "ease.in"
+    }, );
+
+    tl.from("#lgoutbtn", {
+      x: 100,
+      opacity: 0,
+      duration: 0.5,
+      ease: "ease.in"
+    }, );
+
+    tl.from("#head", {
+      y: 100,
+      opacity: 0,
+      duration: 1.5,
+      ease: "ease.in"
+    }, );
+    
+  });
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.fromTo("#clsimg", {
+    x: -100,
+    opacity: 0
+  }, {
+    opacity: 1,
+    x: 0,
+    duration: 1.5,
+    ease: "ease.in",
+    scrollTrigger: {
+      trigger: "#clsimg",
+      start: "top 80%",
+      toggleActions: "play none none none",
+      once: true
+    }
+  });
+  gsap.fromTo("#clsimgcnt", {
+    x: 100,
+    opacity: 0
+  }, {
+    opacity: 1,
+    x: 0,
+    duration: 1.5,
+    ease: "ease.in",
+    scrollTrigger: {
+      trigger: "#clsimgcnt",
+      start: "top 80%",
+      toggleActions: "play none none none",
+      once: true
+    }
+  });
+  gsap.fromTo("#main h1", {
+    y: -50,
+    opacity: 0
+  }, {
+    opacity: 1,
+    y: 0,
+    duration: 1.5,
+    ease: "ease.in",
+    scrollTrigger: {
+      trigger: "#main h1",
+      start: "top 80%",
+      toggleActions: "play none none none",
+      once: true
+    }
+  });
+  gsap.fromTo("#main p", {
+    y: 50,
+    opacity: 0
+  }, {
+    opacity: 1,
+    y: 0,
+    duration: 1.5,
+    ease: "ease.in",
+    scrollTrigger: {
+      trigger: "#main p",
+      start: "top 80%",
+      toggleActions: "play none none none",
+      once: true
+    } 
+  });
+
+  gsap.fromTo("#cards div", {
+    y: 50,
+    opacity: 0
+  }, {
+    opacity: 1,
+    y: 0,
+    duration: 1.5,
+    ease: "ease.in",
+    stagger: 0.2,
+    scrollTrigger: {
+      trigger: "#cards",
+      start: "top 80%",
+      toggleActions: "play none none none",
+      once: true
+    }
+  });
+  
+
+  
+  
+    </script> 
+</body>
+</html>

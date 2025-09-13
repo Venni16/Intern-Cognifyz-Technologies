@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+    <h1 style="color: #333;">Your Response Has Been Recorded!..</h1>
+    <div style="font-family: Arial;">
+        <button style="cursor: pointer ;padding: 10px 20px; background: green; color: white;" onclick="resbtn()">View The Response</button>
+        <ul id="Response" style="display: none;">
+            <li>Name: <%= name %></li>
+            <li>Email: <%= email %></li>
+            <button style="cursor: pointer;padding: 10px 20px; background: rgb(7, 48, 151); color: white;" onclick="clsbtn()">Close Response</button>
+        </ul>
+    </div>
+    <a style="text-decoration: none;" href="/">Make Another Response</a>
+</body>
+
+<script>
+    const Response = document.getElementById("Response")
+
+    function resbtn(){
+        Response.style.display = 'block';
+    }
+
+    function clsbtn(){
+        Response.style.display = 'none'
+    }
+</script>
+</html>

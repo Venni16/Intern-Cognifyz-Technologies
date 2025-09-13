@@ -1,0 +1,72 @@
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+  body{
+    background-image: url('/classroom.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+</style>
+
+<body class="h-full flex items-center justify-center font-sans ">
+  <% if (error && error.length > 0) { %>
+    <div id="errorBox" class="fixed top-4 right-4 bg-red-600 text-white px-4 py-3 rounded shadow transition-opacity duration-1000 opacity-100">
+      <%= error %>
+    </div>
+  <% } %>
+
+  <div class="bg-transparent backdrop:blur-md bg-white/30  rounded-xl w-96 p-8 shadow-lg">
+    <h1 class="text-3xl font-extrabold text-white mb-8 text-center">Login</h1>
+    <form action="/login" method="POST" onsubmit="return validateLogin()" class="space-y-6">
+      <div>
+        <label for="email" class="block text-white font-semibold mb-2">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email"
+          class="w-full px-3 py-2 border border-blue-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label for="password" class="block text-white font-semibold mb-2">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Enter your password"
+          class="w-full px-3 py-2 border border-blue-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <button type="submit"
+        class="w-full py-3 bg-blue-700 text-white font-bold rounded hover:bg-blue-800 transition transform hover:scale-105">
+        Login
+      </button>
+    </form>
+    <p class="mt-6 text-center text-sm text-black font-semibold">
+      Don't have an account?
+      <a href="/signup" class="text-white hover:underline font-semibold">Sign up</a>
+    </p>
+  </div>
+
+  <script>
+    function validateLogin() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!email || !password) {
+        alert('Please fill in both fields.');
+        return false;
+      }
+      return true;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const errBox = document.getElementById('errorBox');
+      if (errBox) {
+        setTimeout(() => {
+          errBox.style.opacity = '0';
+          setTimeout(() => {
+            errBox.style.display = 'none';
+          }, 1000);
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
